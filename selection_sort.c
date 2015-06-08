@@ -3,6 +3,7 @@
 #include <time.h>
 
 void selection_sort(int *a, int size);
+void selection_sort_rec( int *arr, int init, int size );
 
 /*
  * Parametros:
@@ -28,7 +29,8 @@ int main(int argc, char **argv){
 	}
 	printf("\n\n");
 
-	selection_sort(a, n);
+	//selection_sort(a, n);
+	selection_sort_rec (a,0,n);
 
 	printf("Vetor ordenado:\n\t");
 	for(i = 0; i < n; ++i){
@@ -57,3 +59,20 @@ void selection_sort(int *a, int size){
 		a[i] = aux;
 	}
 } 
+
+void selection_sort_rec ( int *a, int init, int size ) {
+    int min, aux, i = 0;
+    min = init;
+    for ( i = init; i < size; i++ ) {
+        if ( a[i] < a[min] ) {
+            min = i;
+        }
+    }
+    aux = a[min];
+	a[min] = a[init];
+	a[init] = aux;
+ 
+    if ( init < size ) {
+        selection_sort_rec ( a, ++init, size ) ;
+    }
+}

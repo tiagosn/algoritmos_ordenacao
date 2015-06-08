@@ -3,6 +3,7 @@
 #include <time.h>
 
 void insertion_sort(int *a, int size);
+void insertion_sort_rec(int *a, int end, int size);
 
 /*
  * Parametros:
@@ -28,7 +29,8 @@ int main(int argc, char **argv){
 	}
 	printf("\n\n");
 
-	insertion_sort(a, n);
+	//insertion_sort(a, n);
+	insertion_sort_rec(a, 1, n);
 
 	printf("Vetor ordenado:\n\t");
 	for(i = 0; i < n; ++i){
@@ -54,3 +56,18 @@ void insertion_sort(int *a, int size){
 		a[j+1] = value;
 	}
 } 
+
+void insertion_sort_rec(int *a, int end, int size){
+
+	int j, value;
+	value = a[end];
+	j=end-1;
+	while(j >= 0 && a[j] > value){
+		a[j+1] = a[j];
+		--j;
+	}
+	a[j+1] = value;
+	
+	if(end < (size -1))
+		 insertion_sort_rec(a,++end,size);
+}
